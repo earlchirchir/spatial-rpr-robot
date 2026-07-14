@@ -1,5 +1,9 @@
 # Spatial RPR Robot Manipulator: Kinematics, Symbolic Dynamics & Simulation
 
+<p align="center">
+  <img src="rpr_robot_render.png" width="500" alt="Spatial RPR Robot Manipulator Render">
+</p>
+
 This repository showcases the kinematics modeling, symbolic dynamics derivation, and numerical simulation of a **3-DOF Spatial RPR (Revolute-Prismatic-Revolute)** robot manipulator. The model is implemented in MATLAB using symbolic calculations and numerical simulations.
 
 ## Project Structure
