@@ -37,13 +37,13 @@ The Denavit-Hartenberg (DH) parameters used to define the kinematics are:
 To calculate the kinetic energy of each link, the linear and angular velocities of the centers of mass (CoM) are calculated recursively from the base (Link 0) to the end-effector (Link 3) using the **Moving Frames Algorithm**:
 
 ### Angular Velocities
-$$\omega_i = R_i^T \left( \omega_{i-1} + (1 - \sigma_i) \dot{q}_i z_0 \right)$$
+$$\omega_i = R_i^T \left( \omega_{i-1} + (1 - \sigma_i) \dot{q}_i z_{i-1} \right)$$
 
 ### Linear Velocities
-$$v_i = R_i^T \left( v_{i-1} + \sigma_i \dot{q}_i z_0 + \omega_{i-1} \times r_{i-1, i} \right)$$
-$$v_{ci} = v_i + \omega_i \times r_{c,i}$$
+$$v_i = R_i^T \left( v_{i-1} + \sigma_i \dot{q}_i z_{i-1} + \omega_{i-1} \times r_{i-1, i} \right)$$
+$$v_{ci} = v_i + \omega_i \times r_{ci}$$
 
-*where $\sigma_i = 0$ for revolute joints, $\sigma_i = 1$ for prismatic joints, and $r_{c,i}$ is the position of the center of mass of link $i$ relative to frame $i$.*
+where $\sigma_i = 0$ for revolute joints, $\sigma_i = 1$ for prismatic joints, and $r_{ci}$ is the position of the center of mass of link $i$ relative to frame $i$.
 
 ---
 
@@ -53,7 +53,9 @@ Using Koenig's theorem, the total kinetic energy ($T$) and potential energy ($U$
 
 $$T = \sum_{i=1}^3 \left( \frac{1}{2} m_i v_{ci}^T v_{ci} + \frac{1}{2} \omega_i^T I_i \omega_i \right)$$
 
-$$U = \sum_{i=1}^3 m_i g_0^T r_{ci}$$
+$$U = \sum_{i=1}^3 -m_i g^T r_{0,ci}$$
+
+where $g = [0, 0, -g_0]^T$ is the gravity vector and $r_{0,ci}$ is the position of the center of mass of link $i$ relative to the base frame.
 
 From the Lagrangian $\mathcal{L} = T - U$, the equations of motion are derived in the standard joint-space formulation:
 
